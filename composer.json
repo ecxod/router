@@ -1,0 +1,29 @@
+{
+    "name": "ecxod/router",
+    "description": "Langweilige Router für das Ecxod Projekt",
+    "type": "library",
+    "keywords": ["ecxod", "router"],
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "src/router/R.php"
+        ],
+        "psr-4": {
+            "Ecxod\\Router\\": "src/router/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Christian Eichert",
+            "email": "c@zp1.net"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2|^7.4|^8.0|^8.2",
+        "nikic/fast-route": "*",
+    },
+    "Suggests": {
+        "php": ">=7.2"
+    }
+}
