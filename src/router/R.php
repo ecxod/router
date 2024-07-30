@@ -38,7 +38,7 @@ class R
         }
     }
 
-    function go()
+    function go(): string
     {
         $txt = "";
         $tvars = $this->vars;
