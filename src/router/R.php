@@ -28,10 +28,14 @@ class R
 
         if ($exp = explode(separator: '?', string: $this->requesturi, limit: 2)) {
             $this->uri = $exp[0];
-            $this->vars = (empty($exp[1]) ? '' : strval($exp[1]));
-            $this->vars = (empty($this->vars) ? '' : explode(separator: '&', string: $this->vars)[0]);
+            $this->vars = empty($exp[1]) ? '' : strval($exp[1]);
+            $this->vars = empty($this->vars) ? '' : explode(separator: '&', string: $this->vars)[0];
         }
         $this->uri = rawurldecode($this->uri);
+        if (empty($_ENV['PHP'])) {
+            $_ENV['PHP'] = "/../php/";
+            \Sentry\captureMessage(message: 'Router::__construct() must have $_ENV["PHP"] deined');
+        }
     }
 
     function go()
@@ -46,8 +50,8 @@ class R
 
                 $r->addRoute(httpMethod: $proto, route: $pfad, handler: function () use ($pfad, &$txt, $tvars): void {
 
-                    $pfad = ( $pfad==='/' ? '/index.php': $pfad);
-                    $realpath = realpath($_SERVER['DOCUMENT_ROOT'] . '/../php/' . $pfad);
+                    $pfad = $pfad === '/' ? '/index.php' : $pfad;
+                    $realpath = realpath($_SERVER['DOCUMENT_ROOT'] . $_ENV['PHP'] . $pfad);
                     if (!empty($realpath)) {
                         ob_start();
                         $vars = $tvars;
