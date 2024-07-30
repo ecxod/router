@@ -1,6 +1,10 @@
 # router
 Router for Ecxod Projects
 
+```sh
+php composer.phar require nikic/fast-route
+```
+
 cat src/konst/K.php (example)
 ```php
 const ROUTEN = [
